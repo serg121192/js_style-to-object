@@ -6,9 +6,9 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const stringArray = sourceString.split(';');
+  const styleDeclarations = sourceString.split(';');
 
-  return stringArray
+  return styleDeclarations
     .filter((item) => item.trim().length > 0)
     .map((item) => {
       const [key, value] = item.split(':').map((part) => part.trim());
@@ -16,10 +16,10 @@ function convertToObject(sourceString) {
       return { key, value };
     })
     .filter((part) => part.key && part.value !== undefined)
-    .reduce((resultObject, { key, value }) => {
-      resultObject[key] = value;
+    .reduce((stylesForObject, { key, value }) => {
+      stylesForObject[key] = value;
 
-      return resultObject;
+      return stylesForObject;
     }, {});
 }
 
